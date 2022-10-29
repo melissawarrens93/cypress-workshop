@@ -24,6 +24,7 @@ describe('Pokemon application', () => {
    * The title of our application is set
    *
    * Exercise: Check that the title of our application is 'Welcome to hack your future'
+   * Use the custom command to get the element
    *
    */
   it('should set the title of our application correctly', () => {
@@ -38,6 +39,7 @@ describe('Pokemon application', () => {
    * A list of pokemons is loaded when our application is served
    *
    * Exercise: Check that our table is filled with 20 pokemons when starting our application
+   * Use the custom command to get the element
    *
    */
   it('should load the default set of pokemons', () => {
@@ -52,6 +54,7 @@ describe('Pokemon application', () => {
    * The list of pokemons is filtered when using the search input and press enter
    *
    * Exercise: Check that our table is filtered when searching for a specific pokemon ( you can pick your favorite ;) )
+   * Use the custom command to get the element
    *
    */
   describe('When searching for a pokemon', () => {
@@ -61,28 +64,5 @@ describe('Pokemon application', () => {
       cy.get('[data-cy="pokemon-table_row"]')
         .should('have.length', 1);
     });
-  });
-
-  /**
-   * * * * * * * *
-   * Exercise 4  *
-   * * * * * * * *
-   *
-   * A list of pokemons is loaded when our application is served
-   *
-   * Exercise: Fetch the next batch of pokemons when clicking the next page button
-   * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
-   *
-   */
-  it('should fetch the next batch of pokemons', () => {
-      cy.intercept(
-        {
-          method: 'GET',
-          url: 'https://pokeapi.co/api/v2/pokemon*',
-        }, {fixture: 'pokemons.json'}
-      ).as('getPokemons');
-      cy.get('[data-cy="pokemon-table_next_button"]').click();
-      cy.wait('@getPokemons');
-      cy.get('[data-cy="pokemon-table_row"]').should('have.length', 5);
   });
 });

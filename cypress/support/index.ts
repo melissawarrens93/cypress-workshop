@@ -2,6 +2,6 @@
 
 declare namespace Cypress {
   interface Chainable {
-    goToPage: (value: string) => Chainable<JQuery>;
+    getBySel: (value: string) => Chainable<JQuery>;
   }
 }
