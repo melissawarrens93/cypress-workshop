@@ -11,15 +11,6 @@
  *
  */
 
-beforeEach(() => {
-  /**
-   *
-   * We removed the cy.visit in the beforeEach
-   * This to make sure our backend call is intercepted before actually visiting the page
-   *
-   */
-});
-
 describe('Pokemon application', () => {
   /**
    * * * * * * * *
@@ -34,6 +25,7 @@ describe('Pokemon application', () => {
    *
    */
   it('should set the title of our application correctly', () => {
+    cy.visit('/');
     cy.getBySel('application_title').contains(/^Welcome to hack your future$/);
   });
 
@@ -50,6 +42,7 @@ describe('Pokemon application', () => {
    *
    */
   it('should load the default set of pokemons', () => {
+    cy.visit('/');
     cy.getBySel('pokemon-table_row').should('have.length', 20);
   });
 
@@ -67,6 +60,7 @@ describe('Pokemon application', () => {
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
+      cy.visit('/');
       cy.getBySel('pokemon-table_search_input')
         .type('pikachu{enter}');
       cy.getBySel('pokemon-table_row')
@@ -88,6 +82,7 @@ describe('Pokemon application', () => {
    *
    */
   it('should fetch the next batch of pokemons', () => {
+    cy.visit('/');
       cy.intercept(
         {
           method: 'GET',
@@ -109,7 +104,7 @@ describe('Pokemon application', () => {
    * Exercise: Visually check that our table is filled with 20 pokemons when starting our application
    * Note: cypress-image-diff-js package is already installed and configured to be used (check this in cypress.config.ts, commands.ts and index.ts)
    */
-  it.only('should load the default set of pokemons in the table', () => {
+  it('should load the default set of pokemons in the table', () => {
     // This will fake a slow backend response
     cy.intercept(
       {
@@ -127,6 +122,8 @@ describe('Pokemon application', () => {
 
     cy.visit('/');
 
-    // TODO: fill in test
+    cy.wait('@getPokemons');
+
+    cy.getBySel('pokemon-table').compareSnapshot('verify-table');
   });
 });
