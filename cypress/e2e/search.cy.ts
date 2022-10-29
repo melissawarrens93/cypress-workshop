@@ -74,7 +74,7 @@ describe('Pokemon application', () => {
    * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
    *
    */
-  it.only('should fetch the next batch of pokemons', () => {
+  it('should fetch the next batch of pokemons', () => {
       cy.intercept(
         {
           method: 'GET',
