@@ -73,7 +73,6 @@ describe('Pokemon application', () => {
    * Exercise: Fetch the next batch of pokemons when clicking the next page button
    * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
    *
-   * Extra: Make sure the first set of pokemons is also mocked out but with a different set
    */
   it('should fetch the next batch of pokemons', () => {
     // TODO: fill in the test
