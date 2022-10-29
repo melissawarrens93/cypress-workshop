@@ -12,7 +12,12 @@
  */
 
 beforeEach(() => {
-  cy.visit('/');
+  /**
+   *
+   * We removed the cy.visit in the beforeEach
+   * This to make sure our backend call is intercepted before actually visiting the page
+   *
+   */
 });
 
 describe('Pokemon application', () => {
@@ -92,5 +97,36 @@ describe('Pokemon application', () => {
       cy.getBySel('pokemon-table_next_button').click();
       cy.wait('@getPokemons');
     cy.getBySel('pokemon-table_row').should('have.length', 5);
+  });
+
+  /**
+   * * * * * * * *
+   * Exercise 5  *
+   * * * * * * * *
+   *
+   * A list of pokemons is loaded when our application is served
+   *
+   * Exercise: Visually check that our table is filled with 20 pokemons when starting our application
+   * Note: cypress-image-diff-js package is already installed and configured to be used (check this in cypress.config.ts, commands.ts and index.ts)
+   */
+  it.only('should load the default set of pokemons in the table', () => {
+    // This will fake a slow backend response
+    cy.intercept(
+      {
+        method: 'GET',
+        url: 'https://pokeapi.co/api/v2/pokemon*',
+      },
+      req => {
+        // do nothing with the req, only call the response with a 5s delay.
+        req.continue(res => {
+          res.setDelay(5000)
+          res.send();
+        });
+      },
+    ).as('getPokemons');
+
+    cy.visit('/');
+
+    // TODO: fill in test
   });
 });
