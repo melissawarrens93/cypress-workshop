@@ -33,39 +33,37 @@
       type="text"
       class="search-term_input"
       placeholder="Name or id of the pokemon you want to find"
-      data-cy="table_search_input"
       [(ngModel)]="searchTerm"
       (keyup.enter)="search()"
     />
     <mat-button-toggle-group>
-      <con-button label="Search" layout="primary" (buttonClicked)="search()" data-cy="table_execute_search"></con-button>
-      <con-button class="search-reset__button" label="Reset" layout="secondary" (buttonClicked)="resetSearch()" data-cy="table_reset_search"></con-button>
+      <con-button label="Search" layout="primary" (buttonClicked)="search()"></con-button>
+      <con-button class="search-reset__button" label="Reset" layout="secondary" (buttonClicked)="resetSearch()"></con-button>
     </mat-button-toggle-group>
   </div>
   <div>
     <mat-button-toggle-group>
-      <mat-button-toggle (change)="previousPage()" data-cy="table_previous">previous</mat-button-toggle>
-      <mat-button-toggle (change)="nextPage()" data-cy="table_next">next</mat-button-toggle>
+      <mat-button-toggle (change)="previousPage()">previous</mat-button-toggle>
+      <mat-button-toggle (change)="nextPage()">next</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
   <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
 
-  <table *ngIf="(isLoading$ | async) === false" data-cy="table" mat-table [dataSource]="pokemons$" class="mat-elevation-z8">
+  <table *ngIf="(isLoading$ | async) === false" mat-table [dataSource]="pokemons$" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> No.</th>
-      <td mat-cell *matCellDef="let element" data-cy="table_row_number"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name</th>
-      <td mat-cell *matCellDef="let element" data-cy="table_row_name"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" data-cy="table_row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
 </div>
 
 <router-outlet></router-outlet>

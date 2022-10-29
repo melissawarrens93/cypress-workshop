@@ -1,11 +1,20 @@
-describe('search pokemon', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
+/**
+ * * * * * *
+ *  NOTE   *
+ * * * * * *
+ *
+ * You can make sure that only 1 test is being executed by adding .only to it
+ * it.only('xxx', () => {});
+ *
+ * Link to cypress commands: https://docs.cypress.io/api/commands/and
+ *
+ *
+ */
 
-  /** OK
+describe('Pokemon application', () => {
+  /**
    * * * * * * * *
-   * Exercise X  *
+   * Exercise 1  *
    * * * * * * * *
    *
    * The title of our application is set
@@ -14,12 +23,12 @@ describe('search pokemon', () => {
    * Bonus: Make sure it matches the exact value, not just a part
    */
   it('should set the title of our application correctly', () => {
-    cy.get('span').contains(/^Welcome to hack your future$/);
+    // TODO: fill in the test
   });
 
-  /** OK
+  /**
    * * * * * * * *
-   * Exercise 1  *
+   * Exercise 2  *
    * * * * * * * *
    *
    * A list of pokemons is loaded when our application is served
@@ -28,14 +37,12 @@ describe('search pokemon', () => {
    *
    */
   it('should load the default set of pokemons', () => {
-    cy.getBySel('table_row').should('have.length', 20);
-    // cy.get('[data-cy="table_row"]').should('have.length', 20);
-    // cy.get('table').find('tbody').find('tr').should('have.length', 20);
+    // TODO: fill in the test
   });
 
-  /** OK
+  /**
    * * * * * * * *
-   * Exercise 2  *
+   * Exercise 3  *
    * * * * * * * *
    *
    * The list of pokemons is filtered when using the search input and press enter
@@ -45,89 +52,7 @@ describe('search pokemon', () => {
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
-      cy.getBySel('table_search_input').type('pikachu{enter}');
-      cy.getBySel('table_row').should('have.length', 1);
-      // cy.get('input').type('pikachu{enter}');
-      // cy.get('table').find('tbody').find('tr').should('have.length', 1);
-      // cy.get('[data-cy="table_search_input"]').type('pikachu{enter}');
-      // cy.get('[data-cy="table_row"]')
-      //   .should('have.length', 1);
-    });
-
-    /** OK
-     * * * * * * * *
-     * Exercise 3  *
-     * * * * * * * *
-     *
-     * The filtered list of pokemons is being reset when clicking the reset button
-     *
-     * Exercise: Reset our filtered table by clicking the reset button
-     */
-    it('should reset the search', () => {
-      cy.getBySel('table_search_input').type('pikachu{enter}');
-      cy.getBySel('table_row').should('have.length', 1);
-
-      cy.getBySel('table_reset_search').type('pikachu{enter}');
-      cy.getBySel('table_row').should('not.have.length', 1);
-
-      // cy.get('[data-cy="table_search_input"]').type('pikachu{enter}');
-      // cy.get('[data-cy="table_row"]').should('have.length', 1);
-      // cy.get('[data-cy="table_reset_search"]').click();
-      // cy.get('[data-cy="table_row"]').should('not.have.length', 1);
+      // TODO: fill in the test
     });
   });
-
-  /**
-   *
-   * ADVANCED TOPICS
-   *
-   * Use custom commands to reduce duplicate code
-   * Mock API calls to not rely on backend services
-   *
-   * **/
-
-  /** OK
-   * * * * * * * *
-   * Exercise 4  *
-   * * * * * * * *
-   *
-   * A list of pokemons is loaded when our application is served
-   *
-   * Exercise: Fetch the next batch of pokemons when clicking the next page button
-   * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
-   *
-   * Extra: Make sure the first set of pokemons is also mocked out but with a different set
-   */
-  it.only('should fetch the next batch of pokemons', () => {
-    cy.intercept(
-      {
-        method: 'GET',
-        url: 'https://pokeapi.co/api/v2/pokemon*',
-      }, {fixture: 'pokemons.json'}
-    ).as('getPokemons');
-    cy.getBySel('table_next').click();
-    cy.wait('@getPokemons');
-    cy.getBySel('table_row').should('have.length', 5);
-  });
-})
-
-
-/**
- * * * * * * * *
- * Exercise 5  *
- * * * * * * * *
- *
- * A list of pokemons is loaded when our application is served
- *
- * Exercise: Visually check that our table is filled with 20 pokemons when starting our application
- * Note: cypress-image-diff-js is already configured to be used
- */
-it('should load the default set of pokemons', () => {
-  cy.get('mat-spinner').should('not.exist');
-  cy.get('[data-cy="table"]').compareSnapshot('pokemon-table');
 });
-
-
-
-// TODO: hover on table row => verify hover
-// TODO: click on pokemon => open new page => verify page
