@@ -1,0 +1,19 @@
+.con-button {
+  margin: 8px 0;
+  padding: 8px;
+  border: none;
+  background: white;
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+
+  &--primary {
+    background: #FFC843;
+    color: white;
+  }
+
+  &--secondary {
+    background: lightgrey;
+    color: white;
+  }
+}
