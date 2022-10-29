@@ -75,7 +75,15 @@ describe('Pokemon application', () => {
    *
    * Extra: Make sure the first set of pokemons is also mocked out but with a different set
    */
-  it('should fetch the next batch of pokemons', () => {
-    // TODO: fill in the test
+  it.only('should fetch the next batch of pokemons', () => {
+      cy.intercept(
+        {
+          method: 'GET',
+          url: 'https://pokeapi.co/api/v2/pokemon*',
+        }, {fixture: 'pokemons.json'}
+      ).as('getPokemons');
+      cy.get('[data-cy="pokemon-table_next_button"]').click();
+      cy.wait('@getPokemons');
+      cy.get('[data-cy="pokemon-table_row"]').should('have.length', 5);
   });
 });
