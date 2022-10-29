@@ -11,6 +11,10 @@
  *
  */
 
+beforeEach(() => {
+  cy.visit('/');
+});
+
 describe('Pokemon application', () => {
   /**
    * * * * * * * *
@@ -20,10 +24,11 @@ describe('Pokemon application', () => {
    * The title of our application is set
    *
    * Exercise: Check that the title of our application is 'Welcome to hack your future'
-   * Bonus: Make sure it matches the exact value, not just a part
+   * Improve the existing test by making use of data-cy
+   *
    */
   it('should set the title of our application correctly', () => {
-    // TODO: fill in the test
+    cy.get('span').contains(/^Welcome to hack your future$/);
   });
 
   /**
@@ -34,10 +39,12 @@ describe('Pokemon application', () => {
    * A list of pokemons is loaded when our application is served
    *
    * Exercise: Check that our table is filled with 20 pokemons when starting our application
+   * Improve the existing test by making use of data-cy
    *
    */
   it('should load the default set of pokemons', () => {
-    // TODO: fill in the test
+    cy.get('table').find('tbody').find('tr')
+      .should('have.length', 20);
   });
 
   /**
@@ -48,11 +55,14 @@ describe('Pokemon application', () => {
    * The list of pokemons is filtered when using the search input and press enter
    *
    * Exercise: Check that our table is filtered when searching for a specific pokemon ( you can pick your favorite ;) )
+   * Improve the existing test by making use of data-cy
    *
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
-      // TODO: fill in the test
+      cy.get('input').type('pikachu{enter}');
+      cy.get('table').find('tbody').find('tr')
+        .should('have.length', 1);
     });
   });
 });
