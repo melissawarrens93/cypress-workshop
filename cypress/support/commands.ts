@@ -1,1 +1,3 @@
-// Here you can put your custom commands
+Cypress.Commands.add('getBySel', (selector, ...args) => {
+  return cy.get(`[data-cy=${selector}]`, ...args);
+});

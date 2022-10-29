@@ -25,9 +25,11 @@ describe('Pokemon application', () => {
    *
    * Exercise: Check that the title of our application is 'Welcome to hack your future'
    *
+   * Improve this exercise by making use of your own custom command
+   *
    */
   it('should set the title of our application correctly', () => {
-    cy.get('[data-cy="application_title"]').contains(/^Welcome to hack your future$/);
+    cy.getBySel('application_title').contains(/^Welcome to hack your future$/);
   });
 
   /**
@@ -39,9 +41,11 @@ describe('Pokemon application', () => {
    *
    * Exercise: Check that our table is filled with 20 pokemons when starting our application
    *
+   * Improve this exercise by making use of your own custom command
+   *
    */
   it('should load the default set of pokemons', () => {
-    cy.get('[data-cy="pokemon-table_row"]').should('have.length', 20);
+    cy.getBySel('pokemon-table_row').should('have.length', 20);
   });
 
   /**
@@ -53,12 +57,14 @@ describe('Pokemon application', () => {
    *
    * Exercise: Check that our table is filtered when searching for a specific pokemon ( you can pick your favorite ;) )
    *
+   * Improve this exercise by making use of your own custom command
+   *
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
-      cy.get('[data-cy="pokemon-table_search_input"]')
+      cy.getBySel('pokemon-table_search_input')
         .type('pikachu{enter}');
-      cy.get('[data-cy="pokemon-table_row"]')
+      cy.getBySel('pokemon-table_row')
         .should('have.length', 1);
     });
   });
@@ -74,16 +80,19 @@ describe('Pokemon application', () => {
    * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
    *
    * Extra: Make sure the first set of pokemons is also mocked out but with a different set
+   *
+   * Improve this exercise by making use of your own custom command
+   *
    */
-  it.only('should fetch the next batch of pokemons', () => {
+  it('should fetch the next batch of pokemons', () => {
       cy.intercept(
         {
           method: 'GET',
           url: 'https://pokeapi.co/api/v2/pokemon*',
         }, {fixture: 'pokemons.json'}
       ).as('getPokemons');
-      cy.get('[data-cy="pokemon-table_next_button"]').click();
+      cy.getBySel('pokemon-table_next_button').click();
       cy.wait('@getPokemons');
-      cy.get('[data-cy="pokemon-table_row"]').should('have.length', 5);
+    cy.getBySel('pokemon-table_row').should('have.length', 5);
   });
 });
