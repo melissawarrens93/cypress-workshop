@@ -27,7 +27,7 @@ describe('Pokemon application', () => {
    *
    */
   it('should set the title of our application correctly', () => {
-    cy.get('[data-cy="application_title"]').contains(/^Welcome to hack your future$/);
+    cy.getBySel('application_title').contains(/^Welcome to hack your future$/);
   });
 
   /**
@@ -41,7 +41,7 @@ describe('Pokemon application', () => {
    *
    */
   it('should load the default set of pokemons', () => {
-    cy.get('[data-cy="pokemon-table_row"]').should('have.length', 20);
+    cy.getBySel('pokemon-table_row').should('have.length', 20);
   });
 
   /**
@@ -56,9 +56,9 @@ describe('Pokemon application', () => {
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
-      cy.get('[data-cy="pokemon-table_search_input"]')
+      cy.getBySel('pokemon-table_search_input')
         .type('pikachu{enter}');
-      cy.get('[data-cy="pokemon-table_row"]')
+      cy.getBySel('pokemon-table_row')
         .should('have.length', 1);
     });
   });
