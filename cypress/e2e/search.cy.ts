@@ -24,11 +24,10 @@ describe('Pokemon application', () => {
    * The title of our application is set
    *
    * Exercise: Check that the title of our application is 'Welcome to hack your future'
-   * Improve the existing test by making use of data-cy
    *
    */
   it('should set the title of our application correctly', () => {
-    cy.get('span').contains(/^Welcome to hack your future$/);
+    cy.get('[data-cy="application_title"]').contains(/^Welcome to hack your future$/);
   });
 
   /**
@@ -39,12 +38,10 @@ describe('Pokemon application', () => {
    * A list of pokemons is loaded when our application is served
    *
    * Exercise: Check that our table is filled with 20 pokemons when starting our application
-   * Improve the existing test by making use of data-cy
    *
    */
   it('should load the default set of pokemons', () => {
-    cy.get('table').find('tbody').find('tr')
-      .should('have.length', 20);
+    cy.get('[data-cy="pokemon-table_row"]').should('have.length', 20);
   });
 
   /**
@@ -55,14 +52,30 @@ describe('Pokemon application', () => {
    * The list of pokemons is filtered when using the search input and press enter
    *
    * Exercise: Check that our table is filtered when searching for a specific pokemon ( you can pick your favorite ;) )
-   * Improve the existing test by making use of data-cy
    *
    */
   describe('When searching for a pokemon', () => {
     it('should update the table', () => {
-      cy.get('input').type('pikachu{enter}');
-      cy.get('table').find('tbody').find('tr')
+      cy.get('[data-cy="pokemon-table_search_input"]')
+        .type('pikachu{enter}');
+      cy.get('[data-cy="pokemon-table_row"]')
         .should('have.length', 1);
     });
+  });
+
+  /**
+   * * * * * * * *
+   * Exercise 4  *
+   * * * * * * * *
+   *
+   * A list of pokemons is loaded when our application is served
+   *
+   * Exercise: Fetch the next batch of pokemons when clicking the next page button
+   * Note: Mock the api call with our own values when fetching the seconds page. Do not put the values in this file
+   *
+   * Extra: Make sure the first set of pokemons is also mocked out but with a different set
+   */
+  it('should fetch the next batch of pokemons', () => {
+    // TODO: fill in the test
   });
 });

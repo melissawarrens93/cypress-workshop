@@ -30,6 +30,7 @@
 <div class="content" role="main">
   <div>
     <input
+      data-cy="pokemon-table_search_input"
       type="text"
       class="search-term_input"
       placeholder="Name or id of the pokemon you want to find"
@@ -62,7 +63,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr data-cy="pokemon-table_row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 
