@@ -12,8 +12,6 @@ NPM:  8.15.0
 You can use Node Version Manager to easily switch between versions.
 See the following page for more information: [Install node and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-In the root folder run `npm install` to make sure all the needed libraries are properly installed.
-
 # CypressWorkshop
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
